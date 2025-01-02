@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request,url_for,redirect
 from database import load_inventory,add_cars,delete_car
 print ("hello")
 app = Flask(__name__)
@@ -73,7 +73,7 @@ def api_inventory():
 def deletecar(id):
     delete_car(id)
     items= load_inventory(-1)
-    return render_template('inventory.html')
+    return redirect(url_for('inventory'))
 
 @app.route('/inventory/<id>')
 def show_car(id):

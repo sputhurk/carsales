@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}
+    Inventory
+{% endblock %}}
+
+{% block content %}
+
+  <div class="container">
+     <h1>{{"Add Car" if thisCar is not defined else "Edit Car"}}</h1>
+    
+     <form action="{{url_for('add_car')}}" method="POST">
+       
+       <label for="make">Make:</label>
+       <input type="text" id="make" name="make" 
+              required value="{{thisCar.make if (thisCar is  defined and thisCar.make is not none) else ''}}" placeholder="{{thisCar.make if thisCar is  defined else ''}}"><br><br>
+
+       <label for="model">Model:</label>
+       <input type="text" id="model" name="model" required
+          value="{{thisCar.model if thisCar is  defined  else ''}}"><br><br>
+
+       <label for="year">Year:</label>
+       <input type="number" id="year" name="year" required
+          value ="{{thisCar.year if thisCar is  defined else ''}}"><br><br>
+
+       <label for="price">Price:</label>
+       <input type="number" id="price" name="price" required
+         value="{{thisCar.msrp if thisCar is  defined else ''}}"><br><br>
+       <input type="hidden" id="type" name="type" value="{{"Edit" if thisCar is  defined else 'Add'}}">
+       <input type="hidden" id="id" name="id" value="{{thisCar.id if thisCar is  defined else none}}">
+       <button type="submit">Save</button> <button onclick="history.back()">Cancel</button>
+     </form>
+  </div>    
+{% endblock %}}

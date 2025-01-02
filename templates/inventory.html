@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+ {% block title %}
+    Inventory
+ {% endblock %}}
+
+ {% block content %}
+    <div class="container">
+    <h2>
+      Inventory Items.
+    </h2>  
+    <table class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Year</th>
+                <th scope="col">Make</th>
+                <th scope="col">Model</th>
+                <th scope="col">Invoice</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.year }}</td>
+                <td>{{ item.make }}</td>
+                <td>{{ item.model}}</td>
+                <td>{{ item.msrp}}</td>
+                <td>
+                 <!--   <a href="/purchase/{{item.id}}" type="button"  class="btn btn-outline btn-info">Edit</a>
+                    <a href="/delete/{{item.id}}" type="button"  class="btn btn-outline btn-info">Delete</a>
+                 -->   
+                <a href="/carinfo/{{item.id}}" type="button"  class="btn btn-outline btn-info">Moreinfo</a>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

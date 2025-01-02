@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}
+    Inventory
+{% endblock %}}
+
+{% block content %}
+    <div class="container">
+        <style>
+            tttable {
+                width: 100%;
+                border-collapse: collapse; /* Ensures borders are not doubled */
+                margin: 1px auto; /* Centers the table */
+            }
+            thhh, tddd {
+                border: 1px ; /* Adds border to cells */
+                padding: 1px; /* Adds padding inside cells */
+                text-align: left; /* Aligns text to the left */
+            }
+            thgh {
+                background-color: #f4f4f4; /* Light background for header */
+                font-weight: bold; /* Bold text for header */
+            }
+            
+        </style>
+        <script>
+            function confirmDelete(event, url) {
+                event.preventDefault(); // Prevent the default link action
+                if (confirm("Are you sure you want to remove {{item.model}}?")) {
+                    // If confirmed, redirect to the URL
+                    window.location.href = url;
+                }
+            }
+        </script>
+        <!--
+        <h2 class="text-center mt-2 mb-4">
+            Car - {{item.make}}
+        tr:hover {
+            background-color: #f1f1f1; /* Highlight row on hover */
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9; /* Alternating row colors */
+        }
+        </h2> --> 
+    
+        <div class="col-12">
+            <!-- color: rgb(120, 120,120); -->
+            <h4 style="margin-bottom:4px;">
+                {{item.year}} {{item.make}} - {{item.model}} - {{item.trim}} 
+            </h4> 
+            <div class="border-bottom" 
+                style="margin-bottom:16px;padding-bottom:8px"/> 
+                <h4 style="color: rgb(120, 120,120); margin-bottom:4px;"</h4> 
+        </div> 
+            <table class="table table-hover table-dark">
+                <tbody>
+                    <tr><td><b>Color</b></td><td>{{item.color}}</td> </tr>
+                    <tr><td><b>Features</b></td><td>{{item.features}}</td> </tr>
+                    <tr><td><b>Qty</b></td><td>{{item.qty}}</td> </tr> 
+                    <tr><td><b>Buffer Qty</b></td><td>{{item.min_qty}}</td> </tr>
+                    <tr><td><b>VIN</b></td><td>{{item.vin}}</td> </tr>
+                    <tr><td><b>MSRP</b></td><td>{{item.msrp}}</td> </tr>
+                    <tr><td><b>Invoice</b></td><td>{{item.invoice_price}}</td> </tr>
+                    <tr><td><b>Created By</b></td><td>{{item.created_by}}</td> </tr>
+                    <tr><td><b>Created Dt</b></td><td>{{item.created_date}}</td></tr>
+                    <tr><td></td><td>
+                        <a href="/purchase/{{item.id}}" type="button"  
+                            class="btn btn-outline btn-info">Edit</a>
+                            <a href="#" onclick="confirmDelete(event, '/delete/{{item.id}}')" 
+                            type="button"')" type="button"  
+                            class="btn btn-outline btn-info">Delete</a>
+                        </td>
+                    </tr>
+                    
+                </tbody>    
+            </table>
+    </div>
+
+{% endblock %}
