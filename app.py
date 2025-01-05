@@ -31,7 +31,7 @@ def customer_info(id):
     return render_template('cust_info.html',item=items[0]) ## to get the dictiory
     #return 'index.html'
 
-###################################
+#####################################
 ## For Customer ADD/Update
 @app.route('/cust_maint',methods=['GET', 'POST'])
 def add_customer() :
