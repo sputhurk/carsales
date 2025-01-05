@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, render_template, request,url_for,redirect
-from database import load_inventory,add_cars,delete_car
+from database import load_inventory,add_cars,delete_car,load_customers,updateCustomer
 print ("hello")
 app = Flask(__name__)
 
@@ -7,6 +7,66 @@ app = Flask(__name__)
 def home():
     return render_template('home.html')
     #return 'index.html'
+######################################
+# Route for customer link from the main the page.
+@app.route('/customer')
+def customer():
+    #return 'index.html'
+    items = load_customers(-1)
+    print(type(items),"YYYYY")
+    print (items)
+    return render_template('customer.html',items=items)
+
+###################################
+@app.route('/customerinfo/<id>')
+def customer_info(id):
+    #items =[
+
+    #  {'id':1, 'name':'ford',   'year':2024, 'price':1000},
+    #  {'id':2, 'name':'tesla',  'year':2022, 'price':1000},
+    #  {'id':3, 'name':'toyota', 'year':2025, 'price':1020}
+    #]
+
+    items= load_customers(id)
+    return render_template('cust_info.html',item=items[0]) ## to get the dictiory
+    #return 'index.html'
+
+###################################
+## For Customer ADD/Update
+@app.route('/cust_maint',methods=['GET', 'POST'])
+def add_customer() :
+
+    if request.method == 'POST':
+      # Handle POST request
+      # Get the values from the submitted forms
+      # make, model,year, price
+      customer = request.form.to_dict();
+      #print (new_car)
+      updateCustomer(customer)
+      return render_template('cust_maint.html')
+    else:
+      # Handle GET request
+      return render_template('cust_maint.html')
+################################
+
+@app.route('/cust_maint/<id>',methods=['GET', 'POST'])
+def edit_customer(id):
+
+      if request.method == 'POST':
+        # Handle POST request
+        # Get the values from the submitted forms
+        # make, model,year, price
+        customer = request.form.to_dict();
+        #print (new_car)
+        updateCustomer(customer)
+        return render_template('add_car.html')
+      else:
+        # Handle GET request
+        items= load_customers(id)
+        print ("XXXXXX")
+        #print (car)
+        
+        return render_template('cust_maint.html',thisCar=items[0])
 
 @app.route('/purchase',methods=['GET', 'POST'])
 def add_car() :

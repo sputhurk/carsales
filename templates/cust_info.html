@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}
+    Customer Info
+{% endblock %}}
+
+{% block content %}
+    <div class="container">
+        <style>
+            tttable {
+                width: 100%;
+                border-collapse: collapse; /* Ensures borders are not doubled */
+                margin: 1px auto; /* Centers the table */
+            }
+            thhh, tddd {
+                border: 1px ; /* Adds border to cells */
+                padding: 1px; /* Adds padding inside cells */
+                text-align: left; /* Aligns text to the left */
+            }
+            thgh {
+                background-color: #f4f4f4; /* Light background for header */
+                font-weight: bold; /* Bold text for header */
+            }
+            
+        </style>
+        <script>
+            function confirmDelete(event, url) {
+                event.preventDefault(); // Prevent the default link action
+                if (confirm("Are you sure you want to remove {{item.model}}?")) {
+                    // If confirmed, redirect to the URL
+                    window.location.href = url;
+                }
+            }
+        </script>
+        <!--
+        <h2 class="text-center mt-2 mb-4">
+            Car - {{item.make}}
+        tr:hover {
+            background-color: #f1f1f1; /* Highlight row on hover */
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9; /* Alternating row colors */
+        }
+        </h2> --> 
+    
+        <div class="col-12">
+            <!-- color: rgb(120, 120,120); -->
+            <h4 style="margin-bottom:4px;">
+                {{item.name}}
+            </h4> 
+            <div class="border-bottom" 
+                style="margin-bottom:16px;padding-bottom:8px"/> 
+                <h4 style="color: rgb(120, 120,120); margin-bottom:4px;"</h4> 
+        </div> 
+            <table class="table table-hover table-dark">
+                <tbody>
+                    <tr><td><b>Name</b></td><td>{{item.name}}</td> </tr>
+                    <tr><td><b>Address1</b></td><td>{{item.address1}}</td> </tr>
+                    <tr><td><b>city</b></td><td>{{item.city}}</td> </tr>
+                    <tr><td><b>State</b></td><td>{{item.state}}</td> </tr> 
+                    <tr><td><b>zip</b></td><td>{{item.zip}}</td> </tr>
+                    
+                    <tr><td><b>Phone</b></td><td>{{item.mobile_phone}}</td> </tr>
+                    <tr><td><b>Email</b></td><td>{{item.primary_email}}</td> </tr>
+                   <!--<tr><td><b>Created By</b></td><td>{{item.created_by}}</td> </tr>
+                    <tr><td><b>Created Dt</b></td><td>{{item.created_date}}</td></tr> --> 
+                    <tr><td></td><td>
+                        <a href="/cust_maint/{{item.id}}" type="button"  
+                            class="btn btn-outline btn-info">Edit</a>
+                            <a href="#" onclick="confirmDelete(event, '/customer_delete/{{item.id}}')" 
+                            type="button"')" type="button"  
+                            class="btn btn-outline btn-info">Delete</a>
+                        </td>
+                    </tr>
+                    
+                </tbody>    
+            </table>
+    </div>
+
+{% endblock %}

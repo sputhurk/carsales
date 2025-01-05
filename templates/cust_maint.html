@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}
+    Customer Maintenance
+{% endblock %}}
+
+{% block content %}
+
+  <div class="container">
+     <h1>{{"New Customer" if thisCust is not defined else "Edit Customer"}}</h1>
+    
+     <form action="{{url_for('add_customer')}}" method="POST">
+       
+       <label for="name">name:</label>
+       <input type="text" id="name" name="name" 
+              required value="{{thisCust.name if (thisCust is  defined and thisCust.name is not none) else ''}}" placeholder="{{thisCust.make if thisCust is  defined else ''}}"><br><br>
+
+       <label for="address1">Address1:</label>
+       <input type="text" id="Address1" name="Address1" required
+          value="{{thisCust.address1 if thisCust is  defined  else ''}}"><br><br>
+
+       <label for="active">active:</label>
+       <input type="text" id="active" name="active" required
+          value ="{{thisCust.active if thisCust is  defined else ''}}"><br><br>
+
+       <label for="price">Price:</label>
+       <input type="number" id="price" name="price" required
+         value="{{thisCust.msrp if thisCust is  defined else ''}}"><br><br>
+       <input type="hidden" id="type" name="type" value="{{"Edit" if thisCust is  defined else 'Add'}}">
+       <input type="hidden" id="id" name="id" value="{{thisCust.id if thisCust is  defined else none}}">
+       <button type="submit">Save</button> <button onclick="history.back()">Cancel</button>
+     </form>
+  </div>    
+{% endblock %}}
